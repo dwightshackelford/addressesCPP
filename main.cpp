@@ -10,13 +10,56 @@ bool isnumeric(string st) {
 	    }
 	    return true;
 	}
-int main()
-{
-     //card_ary = ["E","East", "ENE",  "ESE",  "N", "NE", "NNE", "NNW", "North", "Northeast", "NW", "S", "SE", "South", "Southeast", "Southwest", "SSE", "SSW", "SW", "W","West",  "WNW", "WSW"];
-	 //str_ary = ["Av", "Ave", "Avenue","Blvd", "Boulevard", "Cir", "Circle","Ct", "Court",  "Highway", "HW", "HWY", "Ln", "Lane",  "Rd", "Road", "St", "Street", "Wy", "Way"];
 
-	//saves original in case need to backtrack
-	string address_string = "820 Fetzer Ct., Oakley, CA. 94561";
+bool parse_beginning_numeric_and_unit(string first_word, string &street_num, string &unit_num)	{
+        string num_part;
+        string unit_part;
+        bool num_found = 0;
+        int counter = 0;
+            int len = first_word.length();
+        for(int i = 0; i < len; i++ ){
+            if (int(first_word[i])>=48 || int(first_word[i]) <= 57){
+                num_part = num_part + first_word[i];
+                num_found = 1;
+                counter++;
+            }
+
+        }
+        if (counter < first_word.length()){
+            // remainder is unit num.
+            unit_num = first_word.substr(counter,255);
+            street_num = num_part;
+        }
+
+}
+
+int main(){
+    string cardinal_ary[24] = {"E","East", "ENE",  "ESE",  "N", "NE", "NNE", "NNW", "North", "Northeast", "NW", "S", "SE", "South",\
+                                "Southeast", "Southwest", "SSE", "SSW", "SW", "W","West",  "WNW", "WSW"};
+
+	string street_Type_ary[20]= {"Av", "Ave", "Avenue","Blvd", "Boulevard", "Cir", "Circle","Ct",\
+                                "Court",  "Highway", "HW", "HWY", "Ln", "Lane",  "Rd", "Road", "St", "Street", "Wy", "Way"};
+
+    string states_ary[102]={"Alabama", "AL", "Alaska", "AK", "Arizona", "AZ", "Arkansas", "AR", "California", "CA",\
+                            "Colorado", "CO", "Connecticut", "CT","Delaware", "DE", "District of Columbia", "DC", "Florida", "FL", "Georgia",\
+                            "GA", "Hawaii", "HI", "Idaho", "ID", "Illinois", "IL", "Indiana",\
+                            "IN", "Iowa", "IA", "Kansas", "KS", "Kentucky", "KY", "Louisiana", "LA", "Maine", "ME"\
+                            "Montana", "MT", "Nebraska", "NE", "Nevada", "NV", "New Hampshire", "NH", "New Jersey",\
+                             "NJ", "New Mexico", "NM", "New York", "NY", "North Carolina", "NC",\
+                            "North Dakota", "ND", "Ohio", "OH", "Oklahoma", "OK", "Oregon", "OR", "Maryland", "MD", \
+                            "Massachusetts", "MA", "Michigan", "MI", "Minnesota", "MN",\
+                            "Mississippi", "MS", "Missouri", "MO", "Pennsylvania", "PA", "Rhode Island", "RI", \
+                            "South Carolina", "SC", "South Dakota", "SD", "Tennessee", "TN",\
+                            "Texas", "TX", "Utah", "UT", "Vermont", "VT", "Virginia", "VA", "Washington", "WA", "West Virginia", "WV",\
+                             "Wisconsin", "WI", "Wyoming", "WY"};
+
+    string PO_ary[3] = {"PO", "P.O.", "Post"};
+
+    string CR_ary[3]={"CR", "County", "C.R."};
+
+
+	//saves original strings in case need to back out
+	string address_string = "820 Fetzer Ct.";
 	string name_string = "Dwight David Shackelford";
 	string locale_string = "Oakley, CA 94561";
 
@@ -82,15 +125,20 @@ int main()
             // save as street_num
             address.street_num = first_word;
             cout << address.street_num << endl;
-            cout << first_word << endl;
+
 		}
 		else {
-            //does it start with PO
-            //does it start with HWY
-            //does it start with STATE
-            //does it start with CR
-            //does it have 1/2
-            //does it have unit number
+            //does it start with a numeral
+            // yes
+                //parse number from unit
+            // no
+
+                //does it start with PO
+                //does it start with HWY
+                //does it start with STATE
+                //does it start with CR
+                //does it have 1/2
+                //does it have unit number
 
 		}
 
