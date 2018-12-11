@@ -4,9 +4,12 @@ using namespace std;
 bool isnumeric(string st) {
     cout << "entering isnumeric" << endl;
 	    int len = st.length();
+	    cout << len << " length" << endl;
 	    for (int i = 0; i < len; i++) {
-	        if (int(st[i])<48 || int(st[i]) > 57) {
+	    	cout << st[i] << " " << int(st[i]) << endl;
+	        if (int(st[i]) < 48 || int(st[i]) > 57) {
 	        	cout << "not numeric" << endl;
+	        	
 	            return false;
 	        }
 
@@ -33,13 +36,13 @@ bool parse_beginning_numeric_and_unit(string first_word, string &street_num, str
             }
 
         }
-        cout << num_part << endl;
+        cout << "39 num_part " << num_part << endl;
         
         if (counter < first_word.length()){
             // remainder is unit num.
             unit_num = first_word.substr(counter,255);
             street_num = num_part;
-            cout << unit_num << " "  << street_num << endl;
+            cout << unit_num << "'' "  << street_num << endl;
         }
     return 0;
 }
@@ -56,9 +59,12 @@ bool found_in_array(string input, const string search_array[], int sizeof_ary){
 }
 
 string pop_first_word(string &remaining_address){
+	cout << "62 remaining address " << remaining_address << endl;
 	int position = remaining_address.find(" ");
+	cout << "64 position " << position << endl;
 	string first_word = remaining_address.substr(0,position);
     remaining_address = remaining_address.substr(position+1);
+    cout << "67 first word " << first_word << endl;
     return first_word;
 }
 
@@ -88,7 +94,7 @@ int main(){
 
 
 	//saves original strings in case need to back out
-	string address_string = "820A Fetzer Ct.";
+	string address_string = "820AAA Fetzer Ct.";
 	string name_string = "Dwight David Shackelford";
 	string locale_string = "Oakley, CA 94561";
 
@@ -148,23 +154,23 @@ int main(){
 
 
 		// Get the first word up to a space
-        cout << address_work_string << endl;
+        cout << "157 address work string "<< address_work_string << endl;
 		//position = address_work_string.find(" ");
 		
-		pop_first_word(address_work_string);
+		first_word = pop_first_word(address_work_string);
 		
         //first_word = address_work_string.substr(0,position);
         //address_work_string = address_work_string.substr(position+1);
         
-        cout << first_word << endl;
-        cout << address_work_string << endl;
+        cout << "165 first word " << first_word << endl;
+        cout << "166 address_work_string " << address_work_string << endl;
 
 
 
 		if (isnumeric(first_word)){
             // save as street_num
             address.street_num = first_word;
-            cout << "address.street_num " << address.street_num << endl;
+            cout << "173 address.street_num '" << address.street_num << "'" << endl;
 		}
 		//does it start with a numeral
 		else if (isnumeric(string(1,first_word[0]))) {
@@ -192,8 +198,8 @@ int main(){
 
 		
 		
- 		cout << "address.street_num " << address.street_num << endl;
- 		cout << "address.unit_designator " << address.unit_designator << endl;
+ 		cout << "201 address.street_num '" << address.street_num << "'" << endl;
+ 		cout << "202 address.unit_designator '" << address.unit_designator << "'" << endl;
     return 0;
 }
 
